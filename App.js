@@ -7,25 +7,30 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
+import RegistrationScreen from "./Screens/RegistrationScreen";
+import LoginScreen from "./Screens/LoginScreen";
 
 export default function App() {
   return (
-    <ScrollView>
-      <View>
-        <ImageBackground
-          source={require("./Photo BG.png")}
-          style={{ width: 400, height: 812 }}
-        />
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <ImageBackground
+        source={require("./images/Photo BG.png")}
+        style={styles.background}
+      >
+        {/* <RegistrationScreen /> */}
+        <LoginScreen />
+      </ImageBackground>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: "relative",
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  background: {
+    minWidth: 375,
+    minHeight: 812,
   },
 });
