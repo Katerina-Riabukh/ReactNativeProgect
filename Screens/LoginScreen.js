@@ -1,41 +1,70 @@
+import { useState } from "react";
 import {
   StyleSheet,
-  Button,
-  Image,
   Text,
   TextInput,
   View,
   Pressable,
   TouchableOpacity,
   KeyboardAvoidingView,
+  ImageBackground,
 } from "react-native";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const logIn = () => {
+    console.debug("Welcome");
+  };
+  const switchtoRegistration = () => {
+    navigation.navigate("Registration");
+  };
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView style={styles.keyBordContainer} behavior="padding">
-        <Text style={styles.title}>Увійти</Text>
-        <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            placeholder="Адреса електронної пошти"
-          />
-          <View style={styles.showWrapper}>
-            <TextInput style={styles.input} placeholder="Пароль" />
-            <TouchableOpacity style={styles.showPasswordBtn}>
-              <Text style={styles.showPasswordText}>Показати</Text>
-            </TouchableOpacity>
+      <ImageBackground
+        source={require("../images/Photo BG.png")}
+        style={styles.background}
+      >
+        <KeyboardAvoidingView
+          style={styles.keyBordContainer}
+          behavior="padding"
+        >
+          <Text style={styles.title}>Увійти</Text>
+          <View style={styles.form}>
+            <TextInput
+              style={styles.input}
+              placeholder="Адреса електронної пошти"
+              autoComplete="email"
+              onChangeText={setEmail}
+              value={email}
+            />
+            <View style={styles.showWrapper}>
+              <TextInput
+                style={styles.input}
+                placeholder="Пароль"
+                autoComplete="password"
+                onChangeText={setPassword}
+                value={password}
+              />
+              <TouchableOpacity style={styles.showPasswordBtn}>
+                <Text style={styles.showPasswordText}>Показати</Text>
+              </TouchableOpacity>
+            </View>
           </View>
+        </KeyboardAvoidingView>
+        <View style={styles.BtnWraper}>
+          <TouchableOpacity style={styles.loginButton} onPress={logIn}>
+            <Text style={styles.registrationButtonText}>Увійти</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.registrationLink}
+            onPress={switchtoRegistration}
+          >
+            <Text>Немає акаунту? Зареєструватися</Text>
+          </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
-      <View style={styles.BtnWraper}>
-        <Pressable style={styles.loginButton}>
-          <Text style={styles.registrationButtonText}>Увійти</Text>
-        </Pressable>
-        <TouchableOpacity style={styles.registrationLink}>
-          <Text>Немає акаунту? Зареєструватися</Text>
-        </TouchableOpacity>
-      </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -88,7 +117,7 @@ const styles = StyleSheet.create({
     height: 25,
   },
   title: {
-    // fontFamily: "Roboto-Medium",
+    fontFamily: "Roboto-Medium",
     fontSize: 30,
     lineHeight: 35,
     textAlign: "center",
@@ -105,7 +134,7 @@ const styles = StyleSheet.create({
     borderColor: "#E8E8E8",
     borderRadius: 8,
     padding: 16,
-    // fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     marginBottom: 16,
   },
@@ -123,6 +152,7 @@ const styles = StyleSheet.create({
     right: 16,
   },
   showPasswordText: {
+    fontSize: 16,
     color: "#1B4371",
   },
   BtnWraper: {
@@ -152,5 +182,9 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: 16,
+  },
+  background: {
+    minWidth: 375,
+    minHeight: 812,
   },
 });

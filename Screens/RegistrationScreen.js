@@ -8,48 +8,64 @@ import {
   Pressable,
   TouchableOpacity,
   KeyboardAvoidingView,
+  ImageBackground,
 } from "react-native";
 
-export default function RegistrationScreen() {
+export default function RegistrationScreen({ navigation }) {
+  const switchtoLogin = () => {
+    navigation.navigate("Login");
+  };
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView style={styles.keyBordContainer} behavior="padding">
-        <View style={styles.avatar}>
-          <Image
-            source={require("../avatar/butterfly-2.jpg")}
-            style={styles.avatarImage}
-          />
-          <TouchableOpacity style={styles.addButton}>
+      <ImageBackground
+        source={require("../images/Photo BG.png")}
+        style={styles.background}
+      >
+        <KeyboardAvoidingView
+          style={styles.keyBordContainer}
+          behavior="padding"
+        >
+          <View style={styles.avatar}>
             <Image
-              style={styles.addButtonIcon}
-              source={require("../images/add.png")}
+              source={require("../avatar/butterfly-2.jpg")}
+              style={styles.avatarImage}
             />
-          </TouchableOpacity>
-        </View>
-
-        <Text style={styles.title}>Реєстрація</Text>
-        <View style={styles.form}>
-          <TextInput style={styles.input} placeholder="Логін" />
-          <TextInput
-            style={styles.input}
-            placeholder="Адреса електронної пошти"
-          />
-          <View style={styles.showWrapper}>
-            <TextInput style={styles.input} placeholder="Пароль" />
-            <TouchableOpacity style={styles.showPasswordBtn}>
-              <Text style={styles.showPasswordText}>Показати</Text>
+            <TouchableOpacity style={styles.addButton}>
+              <Image
+                style={styles.addButtonIcon}
+                source={require("../images/add.png")}
+              />
             </TouchableOpacity>
           </View>
+
+          <Text style={styles.title}>Реєстрація</Text>
+          <View style={styles.form}>
+            <TextInput style={styles.input} placeholder="Логін" />
+            <TextInput
+              style={styles.input}
+              placeholder="Адреса електронної пошти"
+            />
+            <View style={styles.showWrapper}>
+              <TextInput style={styles.input} placeholder="Пароль" />
+              <TouchableOpacity style={styles.showPasswordBtn}>
+                <Text style={styles.showPasswordText}>Показати</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+        <View style={styles.BtnWraper}>
+          <Pressable style={styles.registrationButton}>
+            <Text style={styles.registrationButtonText}>Зареєстуватися</Text>
+          </Pressable>
+
+          <TouchableOpacity
+            style={styles.registrationLink}
+            onPress={switchtoLogin}
+          >
+            <Text>Вже є акаунт? Увійти</Text>
+          </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
-      <View style={styles.BtnWraper}>
-        <Pressable style={styles.registrationButton}>
-          <Text style={styles.registrationButtonText}>Зареєстуватися</Text>
-        </Pressable>
-        <TouchableOpacity style={styles.registrationLink}>
-          <Text>Вже є акаунт? Увійти</Text>
-        </TouchableOpacity>
-      </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -166,5 +182,9 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: 16,
+  },
+  background: {
+    minWidth: 375,
+    minHeight: 812,
   },
 });
