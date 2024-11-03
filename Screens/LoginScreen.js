@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   ImageBackground,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 export default function LoginScreen({ navigation }) {
@@ -21,51 +23,53 @@ export default function LoginScreen({ navigation }) {
     navigation.navigate("Registration");
   };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../images/Photo BG.png")}
-        style={styles.background}
-      >
-        <KeyboardAvoidingView
-          style={styles.keyBordContainer}
-          behavior="padding"
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../images/Photo BG.png")}
+          style={styles.background}
         >
-          <Text style={styles.title}>Увійти</Text>
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Адреса електронної пошти"
-              autoComplete="email"
-              onChangeText={setEmail}
-              value={email}
-            />
-            <View style={styles.showWrapper}>
+          <KeyboardAvoidingView
+            style={styles.keyBordContainer}
+            behavior="padding"
+          >
+            <Text style={styles.title}>Увійти</Text>
+            <View style={styles.form}>
               <TextInput
                 style={styles.input}
-                placeholder="Пароль"
-                autoComplete="password"
-                onChangeText={setPassword}
-                value={password}
+                placeholder="Адреса електронної пошти"
+                autoComplete="email"
+                onChangeText={setEmail}
+                value={email}
               />
-              <TouchableOpacity style={styles.showPasswordBtn}>
-                <Text style={styles.showPasswordText}>Показати</Text>
-              </TouchableOpacity>
+              <View style={styles.showWrapper}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Пароль"
+                  autoComplete="password"
+                  onChangeText={setPassword}
+                  value={password}
+                />
+                <TouchableOpacity style={styles.showPasswordBtn}>
+                  <Text style={styles.showPasswordText}>Показати</Text>
+                </TouchableOpacity>
+              </View>
             </View>
+          </KeyboardAvoidingView>
+          <View style={styles.BtnWraper}>
+            <TouchableOpacity style={styles.loginButton} onPress={logIn}>
+              <Text style={styles.registrationButtonText}>Увійти</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.registrationLink}
+              onPress={switchtoRegistration}
+            >
+              <Text>Немає акаунту? Зареєструватися</Text>
+            </TouchableOpacity>
           </View>
-        </KeyboardAvoidingView>
-        <View style={styles.BtnWraper}>
-          <TouchableOpacity style={styles.loginButton} onPress={logIn}>
-            <Text style={styles.registrationButtonText}>Увійти</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.registrationLink}
-            onPress={switchtoRegistration}
-          >
-            <Text>Немає акаунту? Зареєструватися</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

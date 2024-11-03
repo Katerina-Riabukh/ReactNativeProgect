@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   ImageBackground,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 export default function RegistrationScreen({ navigation }) {
@@ -16,57 +18,60 @@ export default function RegistrationScreen({ navigation }) {
     navigation.navigate("Login");
   };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../images/Photo BG.png")}
-        style={styles.background}
-      >
-        <KeyboardAvoidingView
-          style={styles.keyBordContainer}
-          behavior="padding"
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../images/Photo BG.png")}
+          style={styles.background}
         >
-          <View style={styles.avatar}>
-            <Image
-              source={require("../avatar/butterfly-2.jpg")}
-              style={styles.avatarImage}
-            />
-            <TouchableOpacity style={styles.addButton}>
+          <KeyboardAvoidingView
+            style={styles.keyBordContainer}
+            behavior="padding"
+            // behavior={Platform.OS == "ios" ? "padding" : "height"}
+          >
+            <View style={styles.avatar}>
               <Image
-                style={styles.addButtonIcon}
-                source={require("../images/add.png")}
+                source={require("../avatar/butterfly-2.jpg")}
+                style={styles.avatarImage}
               />
-            </TouchableOpacity>
-          </View>
-
-          <Text style={styles.title}>Реєстрація</Text>
-          <View style={styles.form}>
-            <TextInput style={styles.input} placeholder="Логін" />
-            <TextInput
-              style={styles.input}
-              placeholder="Адреса електронної пошти"
-            />
-            <View style={styles.showWrapper}>
-              <TextInput style={styles.input} placeholder="Пароль" />
-              <TouchableOpacity style={styles.showPasswordBtn}>
-                <Text style={styles.showPasswordText}>Показати</Text>
+              <TouchableOpacity style={styles.addButton}>
+                <Image
+                  style={styles.addButtonIcon}
+                  source={require("../images/add.png")}
+                />
               </TouchableOpacity>
             </View>
-          </View>
-        </KeyboardAvoidingView>
-        <View style={styles.BtnWraper}>
-          <Pressable style={styles.registrationButton}>
-            <Text style={styles.registrationButtonText}>Зареєстуватися</Text>
-          </Pressable>
 
-          <TouchableOpacity
-            style={styles.registrationLink}
-            onPress={switchtoLogin}
-          >
-            <Text>Вже є акаунт? Увійти</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </View>
+            <Text style={styles.title}>Реєстрація</Text>
+            <View style={styles.form}>
+              <TextInput style={styles.input} placeholder="Логін" />
+              <TextInput
+                style={styles.input}
+                placeholder="Адреса електронної пошти"
+              />
+              <View style={styles.showWrapper}>
+                <TextInput style={styles.input} placeholder="Пароль" />
+                <TouchableOpacity style={styles.showPasswordBtn}>
+                  <Text style={styles.showPasswordText}>Показати</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+          <View style={styles.BtnWraper}>
+            <Pressable style={styles.registrationButton}>
+              <Text style={styles.registrationButtonText}>Зареєстуватися</Text>
+            </Pressable>
+
+            <TouchableOpacity
+              style={styles.registrationLink}
+              onPress={switchtoLogin}
+            >
+              <Text>Вже є акаунт? Увійти</Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
